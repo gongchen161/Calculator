@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     func clear() {
         label.text = "\(ans)"
         mode = 1
-        left = 0
+        left = right
         right = 0
         dot = false
         dotFactor = 0.1
