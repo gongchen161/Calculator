@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var label: UILabel!
+    
+    
+    @IBOutlet weak var input: UILabel!
+    @IBOutlet weak var output: UILabel!
     var ans:Double = 0
     var mode:Int = 1
     var left:Double = 0
@@ -19,7 +22,7 @@ class ViewController: UIViewController {
     var dot:Bool = false
     var dotFactor:Double = 0.1
     
-    func input(i:Double) {
+    func getInput(i:Double) {
         if (mode == 1){
             if (!dot) {
                 left = left * 10 + i
@@ -27,7 +30,7 @@ class ViewController: UIViewController {
                 left = left + i * dotFactor
                 dotFactor /= 10
             }
-            label.text = "\(left)"
+           // input.text = "\(left)"
             
         } else if (mode == 2) {
             if (!dot) {
@@ -36,69 +39,75 @@ class ViewController: UIViewController {
                 right = right + i * dotFactor
                 dotFactor /= 10
             }
-            label.text = "\(right)"
         }
+        input.text = input.text! + String(format: "%.0f", i);
     }
     
     func opera(c:String) {
         mode = 2
         dot = false
         dotFactor = 0.1
-        label.text = label.text! + " " + c + " "
+        input.text = input.text! + " " + c + " "
     }
     
     func clear() {
-        label.text = "\(ans)"
+        input.text = ""
+        output.text = "0"
         mode = 1
-        left = right
+        left = 0
         right = 0
         dot = false
         dotFactor = 0.1
     }
     
+    @IBAction func buttonAC(_ sender: UIButton) {
+        clear();
+    }
+    
+    
     @IBAction func buttonSeven(_ sender: UIButton) {
-        input(i:7.0)
+        getInput(i:7)
     }
     
     @IBAction func buttonEight(_ sender: UIButton) {
-        input(i:8.0)
+        getInput(i:8)
     }
     
     
     @IBAction func buttonNine(_ sender: UIButton) {
-        input(i:9.0)
+        getInput(i:9)
     }
     
     
     @IBAction func buttonFour(_ sender: UIButton) {
-        input(i:4.0)
+       getInput(i:4)
     }
     
     @IBAction func buttonFive(_ sender: UIButton) {
-        input(i:5.0)
+        getInput(i:5)
     }
     
     
     @IBAction func buttonSix(_ sender: UIButton) {
-        input(i:6.0)
+        getInput(i:6)
     }
     
     
     @IBAction func buttonOne(_ sender: UIButton) {
-        input(i:1.0)
+        getInput(i:1)
     }
     
     @IBAction func buttonTwo(_ sender: UIButton) {
-        input(i:2.0)
+       getInput(i:2)
     }
     
    
     @IBAction func buttonThree(_ sender: UIButton) {
-        input(i:3.0)
+        getInput(i:3)
     }
     
     @IBAction func buttonZero(_ sender: UIButton) {
-        input(i:0.0)
+        getInput(i:0)
     }
     
     @IBAction func buttonPlus(_ sender: UIButton) {
@@ -132,13 +141,14 @@ class ViewController: UIViewController {
         } else if (op == 4) {
             ans = left / right
         }
-       
-        clear()
+        output.text = "\(ans)"
     }
 
     @IBAction func buttonDot(_ sender: UIButton) {
         dot = true
+        input.text = input.text! + "."
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
