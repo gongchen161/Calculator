@@ -19,13 +19,18 @@ class ViewController: UIViewController {
     var left:Double = 0
     var right:Double = 0
     var leftStr:String = ""
-    var op:Int = 0
+    var rightStr:String = ""
+    var opStr:String = ""
     var dot:Bool = false
     var dotFactor:Double = 0.1
     var negFactor:Double = 1;
     
+    func displayInput() {
+        input.text = leftStr + opStr + rightStr;
+    }
+    
     func getDigit(i:Double) {
-
+        
         if (mode == 0){
             mode = 1
         } else if (mode == 2) {
@@ -39,6 +44,7 @@ class ViewController: UIViewController {
                 left = left + i * dotFactor
                 dotFactor /= 10
             }
+            leftStr = leftStr + String(format: "%.0f", i);
             
         } else if (mode == 3) {
             if (!dot) {
@@ -47,10 +53,10 @@ class ViewController: UIViewController {
                 right = right + i * dotFactor
                 dotFactor /= 10
             }
+            rightStr = rightStr + String(format: "%.0f", i);
         }
-
-
-        input.text = input.text! + String(format: "%.0f", i);
+        
+        displayInput()
         
     }
     
@@ -58,15 +64,15 @@ class ViewController: UIViewController {
         mode = 2
         dot = false
         dotFactor = 0.1
-        input.text = leftStr + " " + c + " "
+        displayInput()
     }
     
     func adjustLeft() {
         if (mode == 1) {
-            leftStr = input.text!
             left = left * negFactor;
         }
     }
+    
     func clear() {
         input.text = ""
         output.text = "0"
@@ -75,7 +81,8 @@ class ViewController: UIViewController {
         left = 0
         right = 0
         leftStr = ""
-        op = 0
+        rightStr = ""
+        opStr = ""
         dot = false
         dotFactor = 0.1
         negFactor = 1
@@ -134,7 +141,7 @@ class ViewController: UIViewController {
     @IBAction func buttonPlus(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
             adjustLeft()
-            op = 1
+            opStr = " + "
             getOperator(c:"+")
         }
     }
@@ -142,11 +149,12 @@ class ViewController: UIViewController {
     @IBAction func buttonMinus(_ sender: UIButton) {
         if (mode == 0) {
             negFactor = -1;
-            input.text = "-";
+            leftStr = leftStr + "-";
+            displayInput()
         }
         if (mode == 1 || mode == 2){
             adjustLeft()
-            op = 2
+            opStr = " - "
             getOperator(c:"-")
         }
     }
@@ -154,7 +162,7 @@ class ViewController: UIViewController {
     @IBAction func buttonMulti(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
             adjustLeft()
-            op = 3
+            opStr = " * "
             getOperator(c:"*")
         }
     }
@@ -163,19 +171,19 @@ class ViewController: UIViewController {
     @IBAction func buttonDivide(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
             adjustLeft()
-            op = 4
+            opStr = " / "
             getOperator(c:"/")
         }
     }
     
     @IBAction func buttonEqual(_ sender: UIButton) {
-        if (op == 1) {
+        if (opStr == " + ") {
             ans  = left + right
-        } else if (op == 2) {
+        } else if (opStr == " - ") {
             ans = left - right
-        } else if (op == 3) {
+        } else if (opStr == " * ") {
             ans = left * right
-        } else if (op == 4) {
+        } else if (opStr == " / ") {
             ans = left / right
         }
         output.text = "\(ans)"
@@ -183,7 +191,12 @@ class ViewController: UIViewController {
     
     @IBAction func buttonDot(_ sender: UIButton) {
         dot = true
-        input.text = input.text! + "."
+        if (mode == 0 || mode == 1) {
+            leftStr = leftStr + "."
+        } else if (mode == 2 || mode == 3) {
+            rightStr = rightStr + "."
+        }
+        displayInput()
     }
     
     
