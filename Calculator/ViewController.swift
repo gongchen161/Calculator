@@ -64,6 +64,7 @@ class ViewController: UIViewController {
         mode = 2
         dot = false
         dotFactor = 0.1
+        negFactor = 1
         displayInput()
     }
     
@@ -139,23 +140,32 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPlus(_ sender: UIButton) {
-        if (mode == 1 || mode == 2){
+        if (mode == 0) {
+            leftStr = leftStr + "+";
+            displayInput()
+        } else if (mode == 1){
             adjustLeft()
             opStr = " + "
             getOperator(c:"+")
+        } else if (mode == 2) {
+            rightStr = rightStr + "+";
+            displayInput()
         }
     }
     
     @IBAction func buttonMinus(_ sender: UIButton) {
         if (mode == 0) {
-            negFactor = -1;
+            negFactor = negFactor * -1;
             leftStr = leftStr + "-";
             displayInput()
-        }
-        if (mode == 1 || mode == 2){
+        } else if (mode == 1){
             adjustLeft()
             opStr = " - "
             getOperator(c:"-")
+        } else if (mode == 2) {
+            negFactor = negFactor * -1;
+            rightStr = rightStr + "-";
+            displayInput()
         }
     }
     
@@ -177,6 +187,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonEqual(_ sender: UIButton) {
+        
+        right = right * negFactor;
+        
+        if (mode < 3){
+            output.text = leftStr
+            return
+        }
         if (opStr == " + ") {
             ans  = left + right
         } else if (opStr == " - ") {
