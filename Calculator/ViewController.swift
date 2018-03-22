@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     var negFactor:Double = 1;
     
     func displayInput() {
-        input.text = leftStr + opStr + rightStr;
+        input.text = leftStr + " " + opStr + " " + rightStr;
     }
     
     func getDigit(i:Double) {
@@ -65,6 +65,7 @@ class ViewController: UIViewController {
         dot = false
         dotFactor = 0.1
         negFactor = 1
+        opStr = c
         displayInput()
     }
     
@@ -92,6 +93,76 @@ class ViewController: UIViewController {
     @IBAction func buttonAC(_ sender: UIButton) {
         clear();
     }
+    
+    @IBAction func buttonSqrt(_ sender: UIButton) {
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "Sqrt")
+        }
+    }
+    
+    @IBAction func buttonSquare(_ sender: UIButton) {
+        if (mode == 1) {
+            right = 1
+            getOperator(c: "^2")
+            mode = 3
+        }
+    }
+    
+    @IBAction func buttonSin(_ sender: UIButton) {
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "sin")
+        }
+    }
+    
+    @IBAction func buttonCos(_ sender: UIButton) {
+        
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "cos")
+        }
+    }
+    
+    
+   
+    @IBAction func buttonTan(_ sender: UIButton) {
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "tan")
+        }
+        
+    }
+    
+    
+    @IBAction func buttonLn(_ sender: UIButton) {
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "ln")
+        }
+
+    }
+    
+    @IBAction func buttonLog(_ sender: UIButton) {
+        if (mode == 0) {
+            left = 1
+            getOperator(c: "log")
+        }
+        
+    }
+    
+    
+    @IBAction func buttonPower(_ sender: UIButton) {
+        
+        if (mode == 1 || mode == 2){
+            adjustLeft()
+            getOperator(c:"^")
+        }
+        
+    }
+    
+    
+    
     
     
     @IBAction func buttonSeven(_ sender: UIButton) {
@@ -145,7 +216,6 @@ class ViewController: UIViewController {
             displayInput()
         } else if (mode == 1){
             adjustLeft()
-            opStr = " + "
             getOperator(c:"+")
         } else if (mode == 2) {
             rightStr = rightStr + "+";
@@ -160,7 +230,6 @@ class ViewController: UIViewController {
             displayInput()
         } else if (mode == 1){
             adjustLeft()
-            opStr = " - "
             getOperator(c:"-")
         } else if (mode == 2) {
             negFactor = negFactor * -1;
@@ -172,7 +241,6 @@ class ViewController: UIViewController {
     @IBAction func buttonMulti(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
             adjustLeft()
-            opStr = " * "
             getOperator(c:"*")
         }
     }
@@ -181,7 +249,6 @@ class ViewController: UIViewController {
     @IBAction func buttonDivide(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
             adjustLeft()
-            opStr = " / "
             getOperator(c:"/")
         }
     }
@@ -194,14 +261,30 @@ class ViewController: UIViewController {
             output.text = leftStr
             return
         }
-        if (opStr == " + ") {
+        if (opStr == "+") {
             ans  = left + right
-        } else if (opStr == " - ") {
+        } else if (opStr == "-") {
             ans = left - right
-        } else if (opStr == " * ") {
+        } else if (opStr == "*") {
             ans = left * right
-        } else if (opStr == " / ") {
+        } else if (opStr == "/") {
             ans = left / right
+        } else if (opStr == "Sqrt") {
+            ans = left * right.squareRoot()
+        } else if (opStr == "^2") {
+            ans = left * left * right
+        } else if (opStr == "sin") {
+            ans = left * sin(right)
+        } else if (opStr == "cos") {
+            ans = left * cos(right)
+        } else if (opStr == "tan") {
+            ans = left * tan(right)
+        } else if (opStr == "ln") {
+            ans = left * log(right)
+        } else if (opStr == "log") {
+            ans = left * log10(right)
+        }else if (opStr == "^") {
+            ans = pow(left, right)
         }
         output.text = "\(ans)"
     }
