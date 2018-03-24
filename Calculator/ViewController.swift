@@ -39,18 +39,18 @@ class ViewController: UIViewController {
         
         if (mode == 1){
             if (!dot) {
-                left = left * 10 + i
+                left = left * 10 + i * negFactor
             } else {
-                left = left + i * dotFactor
+                left = left + i * dotFactor * negFactor
                 dotFactor /= 10
             }
             leftStr = leftStr + String(format: "%.0f", i);
             
         } else if (mode == 3) {
             if (!dot) {
-                right = right * 10 + i
+                right = right * 10 + i * negFactor
             } else {
-                right = right + i * dotFactor
+                right = right + i * dotFactor * negFactor
                 dotFactor /= 10
             }
             rightStr = rightStr + String(format: "%.0f", i);
@@ -69,11 +69,6 @@ class ViewController: UIViewController {
         displayInput()
     }
     
-    func adjustLeft() {
-        if (mode == 1) {
-            left = left * negFactor;
-        }
-    }
     
     func clear() {
         input.text = ""
@@ -155,7 +150,6 @@ class ViewController: UIViewController {
     @IBAction func buttonPower(_ sender: UIButton) {
         
         if (mode == 1 || mode == 2){
-            adjustLeft()
             getOperator(c:"^")
         }
         
@@ -215,7 +209,6 @@ class ViewController: UIViewController {
             leftStr = leftStr + "+";
             displayInput()
         } else if (mode == 1){
-            adjustLeft()
             getOperator(c:"+")
         } else if (mode == 2) {
             rightStr = rightStr + "+";
@@ -229,7 +222,6 @@ class ViewController: UIViewController {
             leftStr = leftStr + "-";
             displayInput()
         } else if (mode == 1){
-            adjustLeft()
             getOperator(c:"-")
         } else if (mode == 2) {
             negFactor = negFactor * -1;
@@ -240,7 +232,6 @@ class ViewController: UIViewController {
     
     @IBAction func buttonMulti(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
-            adjustLeft()
             getOperator(c:"*")
         }
     }
@@ -248,15 +239,12 @@ class ViewController: UIViewController {
     
     @IBAction func buttonDivide(_ sender: UIButton) {
         if (mode == 1 || mode == 2){
-            adjustLeft()
             getOperator(c:"/")
         }
     }
     
     @IBAction func buttonEqual(_ sender: UIButton) {
-        
-        right = right * negFactor;
-        
+    
         if (mode < 3){
             output.text = leftStr
             return
