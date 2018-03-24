@@ -69,6 +69,9 @@
                                 <state key="normal" title="ANS">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonANS:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2kz-6V-Bij"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-4N-aN9">
                                 <rect key="frame" x="1" y="223" width="93" height="73"/>

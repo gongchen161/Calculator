@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     func clear() {
         input.text = ""
         output.text = "0"
-        ans = 0
+        //ans = 0
         mode = 0
         left = 0
         right = 0
@@ -102,6 +102,18 @@ class ViewController: UIViewController {
             getOperator(c: "^2")
             mode = 3
         }
+    }
+    @IBAction func buttonANS(_ sender: UIButton) {
+        if (mode == 0) {
+            left = ans;
+            mode = 1;
+            leftStr = "ANS"
+        } else if (mode == 2) {
+            right = ans;
+            mode = 3
+            rightStr = "ANS"
+        }
+        displayInput();
     }
     
     @IBAction func buttonSin(_ sender: UIButton) {
