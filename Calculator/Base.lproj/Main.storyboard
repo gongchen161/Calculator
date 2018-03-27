@@ -80,6 +80,9 @@
                                 <state key="normal" title="pi">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonPi:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CEG-TT-2Aw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PC6-Qn-nuD">
                                 <rect key="frame" x="95" y="223" width="92.5" height="73"/>
@@ -121,6 +124,9 @@
                                 <state key="normal" title="e">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonE:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BQW-mN-PCS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOh-TK-nce">
                                 <rect key="frame" x="95" y="297" width="92.5" height="73"/>

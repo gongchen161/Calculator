@@ -116,6 +116,19 @@ class ViewController: UIViewController {
         displayInput();
     }
     
+    @IBAction func buttonPi(_ sender: UIButton) {
+        if (mode == 0) {
+            left = Double.pi;
+            leftStr += "pi";
+            mode = 1;
+        } else if (mode == 2) {
+            right = Double.pi;
+            rightStr += "pi";
+            mode = 3;
+        }
+        displayInput();
+   
+    }
     @IBAction func buttonSin(_ sender: UIButton) {
         if (mode == 0) {
             left = 1
@@ -141,6 +154,18 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func buttonE(_ sender: UIButton) {
+        if (mode == 0) {
+            left = M_E;
+            leftStr += "e";
+            mode = 1;
+        } else if (mode == 2) {
+            right = M_E;
+            rightStr += "e";
+            mode = 3;
+        }
+        displayInput();
+    }
     
     @IBAction func buttonLn(_ sender: UIButton) {
         if (mode == 0) {
